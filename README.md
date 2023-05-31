@@ -1,5 +1,133 @@
 # LipReLU
-This repositories is the code for paper "Enhancing Node-Level Adversarial Defenses by Lipschitz Regularization of Graph Neural Networks" in Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining. In addition, restricted to the paper limit of KDD2023, some experimental results can't be placed in the paper, we place them here.
+This repository is the code for paper **"Enhancing Node-Level Adversarial Defenses by Lipschitz Regularization of Graph Neural Networks"** in Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining. In addition, restricted to the paper limit of KDD2023, some experimental results can't be placed in the paper, we place them here.
 
-In the following, we give some major experimental codes and explain their function:
+
+## code implement
+In the following, we give some major experimental codes and explain their function，our code is based on *pytorch* and *pyg*, the methods of adversarial attack and defense is provided by *deeprobust libraries*, a library including common attack and defense methods, the link is **https://github.com/DSE-MSU/DeepRobust** 
+
+our experimental codes can be found in path: **"LipReLU/examples/graph/"**, there are some major codes for our experiment
+* **test_gcn_jaccard.py**: The implement of Jaccard and LipReLU defense methods against metaattack
+* **test_gcn_svd**: The implement of SVD and LipReLU defense methods against metaattack 
+* **test_dice_attack**: The implement of dice attack 
+* **test_dice_gcn**: The implement of various defense methods including LipReLU, against DICE attack on gcn
+* **test_dice_gat**: The implement of various defense methods including LipReLU, against DICE attack on gat
+* **test_topology_attack**: The implement of topology attack
+* **test_topology_gcn**: The implement of various defense methods including LipReLU, against Topology attack on gcn
+* **test_topology_gat**: The implement of various defense methods including LipReLU, against Topology attack on gat
+
+You can use the **hyperparameter lip_relu** to determine whether use LipReLU methods or not, if **lip_relu=True**, LipReLU works, if **lip_relu=False**, LipReLU doesn't work. This can be seen in different defense methods, you can set it True to combine it with different defense methods.
+
+## supplementary experiments
+### Comparison of LipReLU and other baseline methods
+#### Baselines on gcn
+
+
+#### Baselines on gat
+
+### The run time of the experiments in paper
+#### The run time of GCN under Topology attack 
+|  Dataset    |  ptb%             |  0               |  5               |  10              |  15              |  20              |  25              |
+|-------------|-------------------|------------------|------------------|------------------|------------------|------------------|------------------|
+|  Cora       |  GCN              |  1.80±0.08       |  1.70±0.08       |  1.56±0.08       |  1.70±0.08       |  1.73±0.08       |  1.66±0.09       |
+|             |  GCN+LipReLU      |  30.37±0.21      |  29.33±0.34      |  28.80±0.16      |  30.17±0.39      |  28.67±0.39      |  30.67±0.45      |
+|             |  Jaccard          |  364.13±2.21     |  362.03±1.32     |  368.03±3.57     |  371.57±0.59     |  371.30±3.68     |  370.06±0.68     |
+|             |  Jaccard+LipReLU  |  380.17±0.60     |  379.63±3.44     |  385.33±5.56     |  381.00±6.01     |  388.50±0.70     |  387.93±1.22     |
+|             |  SVD              |  2.67±0.17       |  2.65±0.12       |  2.60±0.16       |  2.60±0.82       |  2.57±0.47       |  2.67±0.94       |
+|             |  SVD+LipReLU      |  31.50±0.46      |  30.83±0.46      |  30.77±0.45      |  30.80±0.43      |  31.30±0.67      |  34.73±3.51      |
+|  Citeseer   |  GCN              |  1.50±0.08       |  1.50±0.09       |  1.40±0.08       |  1.40±0.08       |  1.53±0.07       |  1.60±0.09       |
+|             |  GCN+LipReLU      |  26.00± 0.10     |  28.23± 0.04     |  26.40± 0.23     |  26.33± 0.31     |  25.70± 0.05     |  25.80± 0.09     |
+|             |  Jaccard          |  315.50±0.34     |  317.69±0.56     |  315.73±0.45     |  316.77±1.09     |  317.70±1.02     |  320.77±2.11     |
+|             |  Jaccard+LipReLU  |  332.76±1.45     |  333.45±0.76     |  331.89±1.21     |  334.56±1.45     |  332.78±2.22     |  331.43±1.67     |
+|             |  SVD              |  2.73±0.34       |  2.60±0.12       |  2.63±0.04       |  2.83±0.02       |  2.76±0.09       |  2.67±0.08       |
+|             |  SVD+LipReLU      |  27.13±0.67      |  27.53±0.44      |  27.30±0.55      |  26.83±0.23      |  26.80±0.34      |  27.10±1.01      |
+|  Wisconsin  |  GCN              |  1.50±0.08       |  1.53±0.12       |  1.57±0.08       |  1.50±0.09       |  1.50±0.21       |  1.57±0.08       |
+|             |  GCN+LipReLU      |  5.90±0.04       |  5.10±0.08       |  5.56±0.05       |  5.90±0.04       |  6.00±0.08       |  6.10±0.05       |
+|             |  Jaccard          |  41.43±0.54      |  42.12±0.32      |  44.12±0.42      |  41.63±0.45      |  42.57±0.55      |   44.45±0.43     |
+|             |  Jaccard+LipReLU  |  45.56±0.77      |  46.89±0.45      |  45.12±0.45      |  45.74±0.34      |  44.91±0.83      |  46.12±0.16      |
+|             |  SVD              |  5.34±0.32       |  5.12±0.44       |  4.98±0.17       |  5.67±0.34       |  5.43±0.08       |  5.67±0.31       |
+|             |  SVD+LipReLU      |  9.30±0.08       |  9.57±0.04       |  9.32±0.21       |  9.12±0.12       |  9.70±0.08       |  10.83±0.20      |
+
+#### The run time of GCN under Dice attack
+|  Dataset    |  ptb%             |  0               |  5               |  10              |  15              |  20              |  25              |
+|-------------|-------------------|------------------|------------------|------------------|------------------|------------------|------------------|
+|  Cora       |  GCN              |  4.03±0.09       |  4.09±0.08       |  4.09±0.08       |  4.07±0.12       |  4.00±0.08       |  4.23±0.20       |
+|             |  GCN+LipReLU      |  398.70±6.49     |  365.17±2.50     |  380.30±1.47     |  379.63±1.13     |  381.06±0.99     |  387.37±1.18     |
+|             |  Jaccard          |  3.70±0.08       |  3.76±0.04       |  3.70±0.08       |  3.80±0.08       |  3.63±0.12       |  3.80±0.08       |
+|             |  Jaccard+LipReLU  |  377.63±1.29     |  374.56±1.63     |  362.13±1.19     |  367.37±0.41     |  383.67±1.06     |  370.03±2.85     |
+|             |  SVD              |  32.60±2.88      |  35.86±2.88      |  31.96±1.24      |  28.83±0.20      |  31.43±2.52      |  31.23±0.44      |
+|             |  SVD+LipReLU      |  41.93±0.16      |  41.36±0.26      |  40.90±0.29      |  41.10±0.58      |  40.43±0.12      |  40.70±0.08      |
+|  Citeseer   |  GCN              |  3.97±0.16       |  3.93±0.12       |  3.90±0.08       |  3.80±0.04       |  3.76±0.04       |  3.90±0.08       |
+|             |  GCN+LipReLU      |  323.26±1.32     |  336.20±0.58     |  308.43±1.10     |  335.20±0.80     |  324.00±1.77     |  311.77±3.63     |
+|             |  Jaccard          |  3.80±0.08       |  3.67±0.04       |  4.00±0.21       |  3.70±0.08       |  3.70±0.24       |  3.96±0.16       |
+|             |  Jaccard+LipReLU  |  327.23±0.69     |  328.23±1.82     |  320.20±1.84     |  298.30±0.97     |  298.30±0.97     |  312.29±0.89     |
+|             |  SVD              |  27.23±0.24      |  26.23±0.26      |  27.10±0.29      |  27.40±1.39      |  26.09±0.29      |  27.06±1.37      |
+|             |  SVD+LipReLU      |  36.89±0.24      |  36.23±0.26      |  37.10±0.29      |  37.73±1.39      |  36.09±0.29      |  37.06±1.37      |
+|  Wisconsin  |  GCN              |  3.60±0.08       |  3.73±0.20       |  3.80±0.08       |  3.83±0.04       |  3.70±0.08       |  3.83±0.04       |
+|             |  GCN+LipReLU      |  41.57±0.20      |  41.33±0.16      |  43.19±0.37      |  41.57±0.26      |  42.87±0.23      |  40.26±0.24      |
+|             |  Jaccard          |  4.06±0.12       |  4.33±0.32       |  4.19±0.14       |  4.57±0.20       |  4.87±0.20       |   4.26±0.12      |
+|             |  Jaccard+LipReLU  |  46.76±0.20      |  47.53±0.44      |  48.39±0.08      |  47.30±0.08      |  46.69±0.21      |  45.80±0.63      |
+|             |  SVD              |  5.93±0.16       |  6.56±0.16       |  6.86±0.12       |  6.93±0.12       |  6.80±0.28       |  6.10±0.08       |
+|             |  SVD+LipReLU      |  25.30±0.08      |  23.56±0.16      |  26.98±1.20      |  25.78±0.23      |  23.56±0.77      |  25.89±0.45      |
+
+
+#### The run time of GCN under metaattack
+|  Dataset    |  ptb%             |  0               |  5               |  10              |  15              |  20              |  25              |
+|-------------|-------------------|------------------|------------------|------------------|------------------|------------------|------------------|
+|  Cora       |  GCN              |  3.93±0.12       |  3.67±0.23       |  3.80±0.08       |  3.73±0.09       |  3.86±0.20       |  3.56±0.16       |
+|             |  GCN+LipReLU      |  385.67±3.02     |  381.56±2.09     |  381.99±0.19     |  378.67±1.12     |  375.33±1.47     |  376.76±2.40     |
+|             |  Jaccard          |  3.63±0.23       |  3.53±0.65       |  3.80±0.08       |  3.63±0.87       |  3.73±0.09       |  3.56±0.12       |
+|             |  Jaccard+LipReLU  |  386.09±0.78     |  389.06±2.41     |  385.86±1.44     |  35.49±0.57      |  386.36±0.74     |  384.03±0.77     |
+|             |  SVD              |  2.60±0.23       |  2.53±0.65       |  2.66±0.08       |  2.68±0.87       |  2.69±0.09       |  2.67±0.12       |
+|             |  SVD+LipReLU      |  32.40±0.78      |  32.90±2.41      |  34.79±1.11      |  33.06±0.57      |  35.16±0.74      |  33.36±0.77      |
+|  Citeseer   |  GCN              |  3.76±0.23       |  3.83±0.06       |  3.70±0.12       |  3.83±0.14       |  3.60±0.08       |  3.83±0.21       |
+|             |  GCN+LipReLU      |  334.83±2.68     |  314.11±1.02     |  329.92±1.47     |  330.06±1.46     |  336.46±3.76     |  335.73±1.23     |
+|             |  Jaccard          |  3.63±0.16       |  3.80±0.23       |  3.93±0.76       |  3.83±0.72       |  3.86±0.45       |  3.76±0.32       |
+|             |  Jaccard+LipReLU  |  325.43±2.30     |  316.00±3.50     |  316.20±3.02     |  311.83±0.66     |  325.06±1.84     |  313.75±3.82     |
+|             |  SVD              |  2.40±0.16       |  2.26±0.12       |  2.66±0.12       |  2.33±0.14       |  2.63±0.13       |  2.40±0.12       |
+|             |  SVD+LipReLU      |  24.23±2.68      |  27.23±0.32      |  27.73±0.24      |  27.36±0.24      |  27.43±0.23      |  27.63±0.43      |
+|  Wisconsin  |  GCN              |  1.52±0.34       |  1.53±0.71       |  1.70±0.08       |  1.60±0.08       |  1.49±0.08       |  1.60±0.16       |
+|             |  GCN+LipReLU      |  5.93±0.23       |  5.90±0.08       |  6.23±0.12       |  6.16±0.16       |  5.93±0.12       |  6.40±0.24       |
+|             |  Jaccard          |  41.73±0.45      |  42.13±0.78      |  42.86±1.11      |  41.33±0.89      |  41.86±0.92      |   43.23±0.57     |
+|             |  Jaccard+LipReLU  |  44.10±0.06      |  46.13±1.01      |  45.86±0.67      |  46.36±0.23      |  46.00±0.66      |  47.23±0.31      |
+|             |  SVD              |  5.20±1.55       |  5.23±1.11       |  5.03±0.12       |  5.86±0.45       |  6.03±0.14       |  5.86±0.99       |
+|             |  SVD+LipReLU      |  7.16±0.08       |  7.00±0.14       |  7.09±0.22       |  9.13±0.45       |  7.09±0.32       |  8.03±0.08       |
+
+
+
+#### The run time of GAT under Topology attack
+|  Dataset    |  ptb%         |  0                |  5                 |  10                |  15                |  20                |  25                |
+|-------------|---------------|-------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+|  Cora       |  GAT          |   5.83±0.04       |   5.76±0.09        |   5.80±0.04        |   5.90±0.08        |   6.13±0.07        |   5.96±0.05        |
+|             |  GAT+LipReLU  |  3681.49±84.63    |   3597.76±100.12   |   3600.56±13.83    |   3594.23±47.00    |   3637.67±75.09    |   3700.30±27.44    |
+|  Citeseer   |  GAT          |   5.53±0.04       |   5.76±0.06        |   5.79±0.05        |   5.86±0.04        |   5.73±0.04        |   5.73±0.08        |
+|             |   GAT+LipReLU |  2581.57±53.65    |   2480.53±23.76    |   2421.73±78.45    |   2442.26±33.89    |   2391.53±99.67    |   2541.86±43.17    |
+|  Wisconsin  |   GAT         |   5.90±0.08       |   5.76±0.12        |   5.96±0.14        |   5.90±0.43        |   6.23±0.09        |   6.20±0.12        |
+|             |   GAT+LipReLU |  232.56±14.55     |   246.76±10.94     |   244.43±16.78     |   233.29±22.89     |   249.03±10.89     |   229.36±11.34     |
+
+
+#### The run time of GAT under Dice attack
+|  Dataset    |  ptb%         |  0               |  5                |  10               |  15               |  20               |  25               |
+|-------------|---------------|------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
+|  Cora       |  GAT          |   4.83±0.04      |   5.03±0.04       |   5.26±0.06       |   4.93±0.06       |   5.13±0.06       |   5.20±0.05       |
+|             |  GAT+LipReLU  |  3562.93±9.51    |   3596.50±21.65   |   3592.36±5.40    |   3539.79±7.18    |   3626.23±27.00   |   3578.16±8.43    |
+|  Citeseer   |  GAT          |   4.87±0.09      |   4.69±0.43       |   5.00±0.16       |   4.96±0.19       |   5.06±0.12       |   5.03±0.08       |
+|             |   GAT+LipReLU |  2436.90±12.94   |   2626.83±27.64   |   2531.02±11.56   |   2563.93±80.16   |   2453.60±21.02   |   2496.89±44.25   |
+|  Wisconsin  |   GAT         |   5.73±0.16      |   5.76±0.12       |   5.86±0.09       |   5.29±0.12       |   5.00±0.16       |   5.06±0.18       |
+|             |   GAT+LipReLU |  242.43±1.87     |   235.43±6.27     |   244.43±10.85    |   242.47±9.35     |   257.00±25.36    |   238.02±10.93    |
+
+
+#### The run time of gat under metaattack
+    
+|  Dataset    |  ptb%         |  0                |  5                 |  10                |  15                |  20                |  25                |
+|-------------|---------------|-------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+|  Cora       |  GAT          |   4.90±0.21       |   5.13±0.24        |   4.90±0.08        |   5.29±0.14        |   5.00±0.08        |   5.06±0.09        |
+|             |  GAT+LipReLU  |  3604.20±40.10    |   3627.70±16.10    |   3590.76±21.37    |   3646.50±5.88     |   3703.67±11.98    |   3579.80±88.72    |
+|  Citeseer   |  GAT          |   4.73±0.09       |   4.80±0.06        |   4.83±0.05        |   4.93±0.06        |   5.00±0.08        |   4.80±0.07        |
+|             |   GAT+LipReLU |  2412.40±14.89    |   2401.13±11.60    |   2520.36±75.19    |   2413.23±28.56    |   2487.80±26.01    |   2456.50±15.95    |
+|  Wisconsin  |   GAT         |   5.83±0.04       |   5.86±0.24        |   6.26±0.12        |   6.03±0.12        |   5.93±0.45        |   5.96±0.67        |
+|             |   GAT+LipReLU |  256.47±5.79      |   255.60±0.71      |   219.67±2.56      |   237.20±1.12      |   279.40±4.54      |   238.63±4.22      |
+
+
+
+
 
