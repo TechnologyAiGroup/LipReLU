@@ -66,7 +66,7 @@ You can use the **hyperparameter lip_relu** to determine whether use LipReLU met
 |           | GNNGuard | 49.59±0.19 | 48.76±0.76 | 48.26±0.14 | 47.62±0.11 | 46.61±0.23 | 46.28±0.47 |
 |           | LipReLU  | 55.92±0.39 | 56.75±0.39 | 57.30±0.39 | 56.20±1.17 | 55.65±0.78 | 54.27±0.39 |
 
-#### metaatack baseline
+#### Metaatack baseline
 | Dataset     | ptb% | 0    | 5    | 10   | 15   | 20   | 25   |
 |-------------|------|------|------|------|------|------|------|
 | Cora        | GCN  | 83.38±0.26 | 76.44±0.24 | 69.30±0.37 | 61.59±0.82 | 53.79±0.29 | 49.04±0.30 |
@@ -90,7 +90,7 @@ You can use the **hyperparameter lip_relu** to determine whether use LipReLU met
 
 ### Baselines on gat
 
-#### topology baseline
+#### Topology baseline
 | Dataset     | ptb% | 0   | 5   | 10  | 15  | 20  | 25  |
 |-------------|------|-----|-----|-----|-----|-----|-----|
 | Cora        | GAT  | 84.09±0.40 | 81.96±0.35 | 77.99±0.13 | 70.14±0.17 | 64.00±0.45 | 59.01±0.14 |
@@ -106,7 +106,7 @@ You can use the **hyperparameter lip_relu** to determine whether use LipReLU met
 |             | GNNGuard | 52.17±0.13 | 50.96±0.09 | 51.24±0.11 | 50.45±0.33 | 49.56±0.21 | 48.96±0.64 |
 |              | LipReLU | 52.62±0.94 | 52.43±0.38 | 50.14±0.28 | 52.07±0.67 | 51.24±0.68 | 50.97±0.56 |
 
-#### dice baseline
+#### DICE baseline
 
 | Dataset     | ptb% | 0   | 5   | 10  | 15  | 20  | 25  |
 |-------------|------|-----|-----|-----|-----|-----|-----|
@@ -123,7 +123,7 @@ You can use the **hyperparameter lip_relu** to determine whether use LipReLU met
 |         | GNNGuard | 52.07±0.98 | 49.53±0.45 | 47.67±0.49 | 47.62±0.30 | 46.54±0.32 | 46.28±0.77 |
 |         | LipReLU | 52.34±0.38 | 52.62±0.38 | 52.07±1.03 | 51.79±0.39 | 50.96±0.78 | 50.41±0.17 |
 
-#### metaattack baseline
+#### Metaattack baseline
 | Dataset     | ptb% | 0   | 5   | 10  | 15  | 20  | 25  |
 |-------------|------|-----|-----|-----|-----|-----|-----|
 | Cora      | GAT      | 83.63±0.22 | 78.80±0.08  | 74.02±0.45 | 70.89±0.41  | 57.26±0.41 | 50.50±0.21 |
