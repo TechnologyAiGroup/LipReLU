@@ -1,4 +1,4 @@
-# LipReLU
+# LipReLU (KDD'23)
 This repository is the code for paper **"Enhancing Node-Level Adversarial Defenses by Lipschitz Regularization of Graph Neural Networks"** in Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD'23). In addition, because of the page limit, some extra experimental results are provided here.  
 
 
